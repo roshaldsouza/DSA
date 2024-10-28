@@ -1,0 +1,47 @@
+
+Constraints:
+- 1 <= arr.length <= 10^5
+- -10^4 <= arr[i] <= 10^4
+
+ Solution Approaches:
+1. Brute-force**: Calculate sum for all subarrays, `O(n^2)`.
+2. Kadane's Algorithm**: Dynamic programming approach, `O(n)`.
+
+#brute-force approach
+
+def max_subarray_sum_brute_force(arr):
+    max_sum = float('-inf')
+    n = len(arr)
+    for i in range(n):
+        current_sum = 0
+        for j in range(i, n):
+            current_sum += arr[j]
+            max_sum = max(max_sum, current_sum)
+    return max_sum
+
+# Example usage
+arr = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+print("Brute-force result:", max_subarray_sum_brute_force(arr))
+
+
+Kadane's algorithm
+
+def max_subarray_sum_kadane(arr):
+    max_sum = current_sum = arr[0]
+    for num in arr[1:]:
+        current_sum = max(num, current_sum + num)
+        max_sum = max(max_sum, current_sum)
+    return max_sum
+
+# Example usage
+arr = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+print("Kadane's Algorithm result:", max_subarray_sum_kadane(arr))
+
+Explanation of Kadane’s Algorithm
+Step 1: Initialize max_sum and current_sum with the first element.
+Step 2: Iterate through each element, updating current_sum to be the maximum of the current element alone or the current element added to the current_sum.
+Step 3: Update max_sum if current_sum exceeds it.
+Step 4: Return max_sum as the answer.
+For the input [-2, 1, -3, 4, -1, 2, 1, -5, 4], both methods will return 6, as the subarray [4, -1, 2, 1] yields the maximum sum.
+
+ 
